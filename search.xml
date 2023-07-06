@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/07/05/hello-world/</url>
+    <content><![CDATA[<p>This is a new start</p>
+<hr>
+<p>It use markdown, github, hexo to create a personal blog.</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/07/06/%E6%96%B0%E8%B5%B7%E7%82%B9/</url>
+    <content><![CDATA[<h1 id="新起点"><a href="#新起点" class="headerlink" title="新起点"></a>新起点</h1><p>这是一个全新的端口</p>
+<p>这是一个测试文本</p>
+]]></content>
+  </entry>
+</search>
