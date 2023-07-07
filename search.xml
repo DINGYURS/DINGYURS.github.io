@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2023/07/06/T3/</url>
-    <content><![CDATA[<h1 id="New-test"><a href="#New-test" class="headerlink" title="New test"></a>New test</h1><p>这是一个测试案例</p>
-<p>该文本基于markdown语法生成<br>测试文章布局</p>
+    <title>TEST 2</title>
+    <url>/2023/07/07/TEST-2/</url>
+    <content><![CDATA[<p>该文本用于测试hexo server 的实时更新功能</p>
+<p>测试成功</p>
+<p>完成</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>New test</title>
+    <url>/2023/07/06/New%20test/</url>
+    <content><![CDATA[<p>目前，该博客依然处于待完善的状态，还有很多的问题没有得到解决</p>
 ]]></content>
   </entry>
   <entry>
