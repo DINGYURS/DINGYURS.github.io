@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>First Blog</title>
-    <url>/2023/07/05/First%20Blog/</url>
-    <content><![CDATA[<p>我在想，给这个起点赋予一个寓意，什么好呢？</p>
-]]></content>
-  </entry>
-  <entry>
     <title>搭建日志(1)</title>
     <url>/2023/07/08/%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97(1)/</url>
     <content><![CDATA[<ol>
-<li><h3 id="完成对站点图标和头像的修改"><a href="#完成对站点图标和头像的修改" class="headerlink" title="完成对站点图标和头像的修改"></a>完成对站点图标和头像的修改</h3><p>使用<a class="link"   href="https://convertio.co/zh/jpg-webp/" >网站工具 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>将.jpeg转化为.webp，随后在redefine.yml中对info下的defaults.logo进行本地路径替换</p>
+<li><h3 id="完成对站点图标和头像的修改"><a href="#完成对站点图标和头像的修改" class="headerlink" title="完成对站点图标和头像的修改"></a>完成对站点图标和头像的修改</h3><p>使用<a class="link"   href="https://convertio.co/zh/jpg-webp/" >网站工具</a>将.jpeg转化为.webp，随后在redefine.yml中对info下的defaults.logo进行本地路径替换</p>
 </li>
 <li><h3 id="对状态栏进行了修改"><a href="#对状态栏进行了修改" class="headerlink" title="对状态栏进行了修改"></a>对状态栏进行了修改</h3></li>
 <li><h3 id="添加音乐播放器，但是没有完全完善音乐播放的功能"><a href="#添加音乐播放器，但是没有完全完善音乐播放的功能" class="headerlink" title="添加音乐播放器，但是没有完全完善音乐播放的功能"></a>添加音乐播放器，但是没有完全完善音乐播放的功能</h3></li>
 </ol>
 <h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+  </entry>
+  <entry>
+    <title>First Blog</title>
+    <url>/2023/07/05/First%20Blog/</url>
+    <content><![CDATA[<p>我在想，给这个起点赋予一个寓意，什么好呢？</p>
+]]></content>
   </entry>
 </search>
