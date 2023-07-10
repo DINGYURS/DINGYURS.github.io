@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>First Blog</title>
-    <url>/2023/07/05/First%20Blog/</url>
-    <content><![CDATA[<p>我在想，给这个起点赋予一个寓意，什么好呢？</p>
+    <title>搭建日志(2)</title>
+    <url>/2023/07/10/%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97(2)/</url>
+    <content><![CDATA[<ol>
+<li><h3 id="完成对日夜主题的背景修改，最好使用-webp格式"><a href="#完成对日夜主题的背景修改，最好使用-webp格式" class="headerlink" title="完成对日夜主题的背景修改，最好使用.webp格式"></a>完成对日夜主题的背景修改，最好使用.webp格式</h3></li>
+<li><h3 id="完善音乐播放功能"><a href="#完善音乐播放功能" class="headerlink" title="完善音乐播放功能"></a>完善音乐播放功能</h3></li>
+<li><h3 id="使用Gitalk完善文章评论功能"><a href="#使用Gitalk完善文章评论功能" class="headerlink" title="使用Gitalk完善文章评论功能"></a>使用Gitalk完善文章评论功能</h3></li>
+<li><h3 id="以特殊的时间点重新定义博客的创建时间"><a href="#以特殊的时间点重新定义博客的创建时间" class="headerlink" title="以特殊的时间点重新定义博客的创建时间"></a>以特殊的时间点重新定义博客的创建时间</h3><hr>
+</li>
+</ol>
 ]]></content>
   </entry>
   <entry>
@@ -18,15 +24,9 @@
 ]]></content>
   </entry>
   <entry>
-    <title>搭建日志(2)</title>
-    <url>/2023/07/10/%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97(2)/</url>
-    <content><![CDATA[<ol>
-<li><h3 id="完成对日夜主题的背景修改，最好使用-webp格式"><a href="#完成对日夜主题的背景修改，最好使用-webp格式" class="headerlink" title="完成对日夜主题的背景修改，最好使用.webp格式"></a>完成对日夜主题的背景修改，最好使用.webp格式</h3></li>
-<li><h3 id="完善音乐播放功能"><a href="#完善音乐播放功能" class="headerlink" title="完善音乐播放功能"></a>完善音乐播放功能</h3></li>
-<li><h3 id="使用Gitalk完善文章评论功能"><a href="#使用Gitalk完善文章评论功能" class="headerlink" title="使用Gitalk完善文章评论功能"></a>使用Gitalk完善文章评论功能</h3></li>
-<li><h3 id="以特殊的时间点重新定义博客的创建时间"><a href="#以特殊的时间点重新定义博客的创建时间" class="headerlink" title="以特殊的时间点重新定义博客的创建时间"></a>以特殊的时间点重新定义博客的创建时间</h3><hr>
-</li>
-</ol>
+    <title>First Blog</title>
+    <url>/2023/07/05/First%20Blog/</url>
+    <content><![CDATA[<p>我在想，给这个起点赋予一个寓意，什么好呢？</p>
 ]]></content>
   </entry>
 </search>
