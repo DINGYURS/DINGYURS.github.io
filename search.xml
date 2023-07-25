@@ -72,5 +72,8 @@
 <p>​		这种做法可以解决使用Git管理博客时的一个问题：文件的最后修改日期（mtime）会在每次提交（commit）或部署（deploy）时发生改变，导致更新时间在Git提交时也会变化，即使内容没有实质性修改。</p>
 <h3 id="二、为文章提供可加密选项"><a href="#二、为文章提供可加密选项" class="headerlink" title="二、为文章提供可加密选项"></a>二、为文章提供可加密选项</h3><p>​		文章加密后需要输入对应的密码才能查看。</p>
 ]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
   </entry>
 </search>
