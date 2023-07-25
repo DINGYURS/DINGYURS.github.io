@@ -68,9 +68,9 @@
 <span id="more"></span>
 
 <h3 id="一、修改-config-yml"><a href="#一、修改-config-yml" class="headerlink" title="一、修改_config.yml"></a>一、修改<code>_config.yml</code></h3><p>​		将<code>updated_option:</code>从<code>mtime</code>改为<code>date</code>。</p>
-<p>​		通过在Front-matter中设置<code>date</code>字段，然后将<code>updated</code>字段的值设置为<code>date</code>，可以实现在每次Git提交时自动更新<code>updated</code>字段为当前的日期时间，而文章的更新时间会与提交时间保持一致</p>
+<p>​		通过在Front-matter中设置<code>date</code>字段，然后将<code>updated</code>字段的值设置为<code>date</code>，可以实现在每次Git提交时自动更新<code>updated</code>字段为当前的日期时间，而文章的更新时间会与提交时间保持一致。</p>
 <p>​		这种做法可以解决使用Git管理博客时的一个问题：文件的最后修改日期（mtime）会在每次提交（commit）或部署（deploy）时发生改变，导致更新时间在Git提交时也会变化，即使内容没有实质性修改。</p>
-<h3 id="二、为文章提供可加密选项"><a href="#二、为文章提供可加密选项" class="headerlink" title="二、为文章提供可加密选项"></a>二、为文章提供可加密选项</h3><p>​		文章加密后需要输入对应的密码才能查看</p>
+<h3 id="二、为文章提供可加密选项"><a href="#二、为文章提供可加密选项" class="headerlink" title="二、为文章提供可加密选项"></a>二、为文章提供可加密选项</h3><p>​		文章加密后需要输入对应的密码才能查看。</p>
 ]]></content>
   </entry>
 </search>
