@@ -3,7 +3,10 @@
   <entry>
     <title>搭建日志(2)</title>
     <url>/2023/07/10/%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97(2)/</url>
-    <content><![CDATA[<ol>
+    <content><![CDATA[<p>第二次对该网页进行完善</p>
+<span id="more"></span>
+
+<ol>
 <li><h3 id="完成对日夜主题的背景修改，最好使用-webp格式"><a href="#完成对日夜主题的背景修改，最好使用-webp格式" class="headerlink" title="完成对日夜主题的背景修改，最好使用.webp格式"></a>完成对日夜主题的背景修改，最好使用.webp格式</h3></li>
 <li><h3 id="完善音乐播放功能"><a href="#完善音乐播放功能" class="headerlink" title="完善音乐播放功能"></a>完善音乐播放功能</h3></li>
 <li><h3 id="使用Gitalk完善文章评论功能"><a href="#使用Gitalk完善文章评论功能" class="headerlink" title="使用Gitalk完善文章评论功能"></a>使用Gitalk完善文章评论功能</h3></li>
@@ -11,17 +14,26 @@
 </li>
 </ol>
 ]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
   </entry>
   <entry>
     <title>搭建日志(1)</title>
     <url>/2023/07/08/%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97(1)/</url>
-    <content><![CDATA[<ol>
+    <content><![CDATA[<p>第一次对该网页进行完善</p>
+<span id="more"></span>
+
+<ol>
 <li><h3 id="完成对站点图标和头像的修改"><a href="#完成对站点图标和头像的修改" class="headerlink" title="完成对站点图标和头像的修改"></a>完成对站点图标和头像的修改</h3><p>使用<a class="link"   href="https://convertio.co/zh/jpg-webp/" >网站工具</a>将.jpeg转化为.webp，随后在redefine.yml中对info下的defaults.logo进行本地路径替换</p>
 </li>
 <li><h3 id="对状态栏进行了修改"><a href="#对状态栏进行了修改" class="headerlink" title="对状态栏进行了修改"></a>对状态栏进行了修改</h3></li>
 <li><h3 id="添加音乐播放器，但是没有完全完善音乐播放的功能"><a href="#添加音乐播放器，但是没有完全完善音乐播放的功能" class="headerlink" title="添加音乐播放器，但是没有完全完善音乐播放的功能"></a>添加音乐播放器，但是没有完全完善音乐播放的功能</h3></li>
 </ol>
 ]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
   </entry>
   <entry>
     <title>First Blog</title>
@@ -32,11 +44,33 @@
   <entry>
     <title>搭建日志(3)</title>
     <url>/2023/07/14/%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97(3)/</url>
-    <content><![CDATA[<h3 id="修改页脚的布局，使之对称"><a href="#修改页脚的布局，使之对称" class="headerlink" title="修改页脚的布局，使之对称"></a>修改页脚的布局，使之对称</h3>]]></content>
+    <content><![CDATA[<p>第三次对该网页进行完善</p>
+<span id="more"></span>
+<h3 id="修改页脚的布局，使之对称"><a href="#修改页脚的布局，使之对称" class="headerlink" title="修改页脚的布局，使之对称"></a>修改页脚的布局，使之对称</h3>]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
   </entry>
   <entry>
     <title>搭建日志(4)</title>
     <url>/2023/07/20/%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97(4)/</url>
-    <content><![CDATA[<h3 id="修改页脚中的起始时间"><a href="#修改页脚中的起始时间" class="headerlink" title="修改页脚中的起始时间"></a>修改页脚中的起始时间</h3>]]></content>
+    <content><![CDATA[<p>第四次对该网页进行完善</p>
+<span id="more"></span>
+<h3 id="修改页脚中的起始时间"><a href="#修改页脚中的起始时间" class="headerlink" title="修改页脚中的起始时间"></a>修改页脚中的起始时间</h3>]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>搭建日志(5)</title>
+    <url>/2023/07/25/%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97(5)/</url>
+    <content><![CDATA[<p>第五次对该网页进行完善</p>
+<span id="more"></span>
+
+<h3 id="一、修改-config-yml"><a href="#一、修改-config-yml" class="headerlink" title="一、修改_config.yml"></a>一、修改<code>_config.yml</code></h3><p>​		将<code>updated_option:</code>从<code>mtime</code>改为<code>date</code>。</p>
+<p>​		通过在Front-matter中设置<code>date</code>字段，然后将<code>updated</code>字段的值设置为<code>date</code>，可以实现在每次Git提交时自动更新<code>updated</code>字段为当前的日期时间，而文章的更新时间会与提交时间保持一致</p>
+<p>​		这种做法可以解决使用Git管理博客时的一个问题：文件的最后修改日期（mtime）会在每次提交（commit）或部署（deploy）时发生改变，导致更新时间在Git提交时也会变化，即使内容没有实质性修改。</p>
+<h3 id="二、为文章提供可加密选项"><a href="#二、为文章提供可加密选项" class="headerlink" title="二、为文章提供可加密选项"></a>二、为文章提供可加密选项</h3><p>​		文章加密后需要输入对应的密码才能查看</p>
+]]></content>
   </entry>
 </search>
