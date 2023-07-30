@@ -76,4 +76,18 @@
         <category>log</category>
       </categories>
   </entry>
+  <entry>
+    <title>搭建日志(6)</title>
+    <url>/2023/07/30/%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97-6/</url>
+    <content><![CDATA[<p>第六次对该网页进行完善</p>
+<span id="more"></span>
+
+<h3 id="一、修改-config-yml"><a href="#一、修改-config-yml" class="headerlink" title="一、修改_config.yml"></a>一、修改<code>_config.yml</code></h3><p>​		将<code>updated_option:</code>从<code>date</code>改为<code>mtime</code>。</p>
+<p>​		我们使用的是<code>hexo g -d</code>命令来生成和部署hexo博客，但是这并不会修改文章开头的Front-matter信息，包括<code>updated</code>字段。</p>
+<p>​		我们推测这可能是由于<code>updated</code>字段的更新依赖于Git的提交命令，如<code>git commit</code>命令。所以最终我们不得不将<code>updated_option</code>改回原样，以维持文章“最后修改时间”的准确性</p>
+]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
+  </entry>
 </search>
