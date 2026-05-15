@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -9,78 +10,191 @@ import Header from '../components/Header.astro';
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+const allPosts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const currentIndex = allPosts.findIndex((p) => p.data.title === title);
+const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 ---
 
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
 	</head>
 
 	<body>
 		<Header />
 		<main>
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
+				{heroImage && (
+					<div class="hero-image animate" style="animation-delay: 50ms">
+						<Image width={1020} height={510} src={heroImage} alt="" />
+					</div>
+				)}
+				<div class="prose animate" style="animation-delay: 100ms">
 					<div class="title">
 						<div class="date">
 							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+							{updatedDate && (
+								<div class="last-updated-on">
+									更新于 <FormattedDate date={updatedDate} />
+								</div>
+							)}
 						</div>
 						<h1>{title}</h1>
+						{description && <p class="description">{description}</p>}
 						<hr />
 					</div>
 					<slot />
 				</div>
+
+				<!-- Post Navigation -->
+				{(prevPost || nextPost) && (
+					<nav class="post-nav animate" style="animation-delay: 150ms">
+						{prevPost ? (
+							<a href={`/blog/${prevPost.id}/`} class="post-nav-link post-nav-prev">
+								<span class="post-nav-label">&larr; 上一篇</span>
+								<span class="post-nav-title">{prevPost.data.title}</span>
+							</a>
+						) : <div />}
+						{nextPost ? (
+							<a href={`/blog/${nextPost.id}/`} class="post-nav-link post-nav-next">
+								<span class="post-nav-label">下一篇 &rarr;</span>
+								<span class="post-nav-title">{nextPost.data.title}</span>
+							</a>
+						) : <div />}
+					</nav>
+				)}
 			</article>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	.hero-image {
+		width: 100%;
+		max-width: var(--max-width-wide);
+		margin: var(--space-8) auto 0;
+		padding: 0 var(--space-4);
+	}
+
+	.hero-image img {
+		display: block;
+		width: 100%;
+		border-radius: var(--radius);
+		box-shadow: var(--shadow-md);
+	}
+
+	.prose {
+		width: var(--max-width);
+		max-width: calc(100% - 2em);
+		margin: auto;
+		padding: var(--space-6) var(--space-4);
+	}
+
+	.title {
+		margin-bottom: var(--space-8);
+		padding: var(--space-8) 0 0;
+		text-align: center;
+		line-height: 1;
+	}
+
+	.title h1 {
+		margin: 0 0 var(--space-3) 0;
+		font-size: var(--text-4xl);
+		letter-spacing: -0.03em;
+	}
+
+	.description {
+		color: var(--color-text-secondary);
+		font-size: var(--text-lg);
+		margin: 0 0 var(--space-4) 0;
+	}
+
+	.date {
+		margin-bottom: var(--space-3);
+		color: var(--color-text-muted);
+		font-size: var(--text-sm);
+		font-family: var(--font-mono);
+	}
+
+	.last-updated-on {
+		font-style: italic;
+		margin-top: var(--space-2);
+	}
+
+	/* Post Navigation */
+	.post-nav {
+		width: var(--max-width);
+		max-width: calc(100% - 2em);
+		margin: var(--space-12) auto var(--space-8);
+		padding: var(--space-6) 0;
+		border-top: 1px solid var(--color-border);
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-6);
+	}
+
+	.post-nav-link {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+		text-decoration: none;
+		padding: var(--space-4);
+		border-radius: var(--radius);
+		border: 1px solid var(--color-border);
+		transition: all var(--transition-base);
+	}
+
+	.post-nav-link:hover {
+		border-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-border));
+		background: var(--color-bg-secondary);
+	}
+
+	.post-nav-next {
+		text-align: right;
+	}
+
+	.post-nav-label {
+		font-size: var(--text-xs);
+		color: var(--color-text-muted);
+		font-family: var(--font-mono);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.post-nav-title {
+		font-size: var(--text-sm);
+		color: var(--color-text);
+		font-weight: 600;
+		line-height: 1.4;
+	}
+
+	@media (max-width: 768px) {
+		.title h1 {
+			font-size: var(--text-3xl);
+		}
+
+		.prose {
+			padding: var(--space-4) var(--space-3);
+		}
+
+		.post-nav {
+			grid-template-columns: 1fr;
+		}
+
+		.post-nav-next {
+			text-align: left;
+		}
+	}
+</style>

@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx skills *)",
+      "Bash(npm run *)",
+      "Bash(py --version)",
+      "Bash(conda activate *)",
+      "Bash(python \"C:/Users/DING/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"personal tech blog portfolio minimal content-first\" --design-system -p \"DINGYURS Blog\")",
+      "Bash(where python *)",
+      "Bash(where python3 *)",
+      "Bash(where py *)",
+      "Bash(W:/Python 3.11.2/python.exe *)",
+      "Bash(\"W:/Python 3.11.2/python.exe\" \"C:/Users/DING/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"personal tech blog minimal\" --design-system -p \"DINGYURS Blog\")",
+      "WebFetch(domain:8cat.life)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "Bash(pkill -f \"astro dev\")",
+      "WebFetch(domain:github.com)",
+      "Read(//c/Users/DING/.agents/skills/gstack/**)",
+      "Bash(rm -rf ~/.claude/skills/gstack)",
+      "Bash(rm -rf ~/.agents/skills/gstack)",
+      "Bash(git clone *)",
+      "Bash(rm -rf ~/.claude/skills/ui-ux-pro-max)",
+      "Bash(cp -r ~/.agents/skills/ui-ux-pro-max ~/.claude/skills/ui-ux-pro-max)",
+      "Bash(git add *)"
+    ]
+  },
+  "skillOverrides": {
+    "frontend-design": "off"
+  }
+}

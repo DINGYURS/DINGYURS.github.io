@@ -1,63 +1,169 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE, GITHUB_URL } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={`关于 | ${SITE_TITLE}`} description="计算机学习者、技术记录者、摄影爱好者" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="about-page">
+				<div class="page-header animate" style="animation-delay: 50ms">
+					<h1>关于</h1>
+				</div>
+				<article class="about-content animate" style="animation-delay: 100ms">
+					<h2>About Me</h2>
+					<ul>
+						<li>Developer / Learner / 摄影爱好者</li>
+						<li>记录计算机学习中的问题、思考与实践</li>
+					</ul>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+					<h2>Skills</h2>
+					<div class="skills-section">
+						<div class="skill-row">
+							<span class="skill-badge">JavaScript</span>
+							<span class="skill-badge">TypeScript</span>
+							<span class="skill-badge">Vue</span>
+							<span class="skill-badge">Astro</span>
+						</div>
+						<div class="skill-row">
+							<span class="skill-badge">Python</span>
+							<span class="skill-badge">HTML/CSS</span>
+							<span class="skill-badge">Git</span>
+							<span class="skill-badge">Linux</span>
+						</div>
+					</div>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+					<h2>Tech Stack</h2>
+					<p>
+						博客基于 <a href="https://astro.build" target="_blank" rel="noopener">Astro</a> 构建，
+						使用 <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a> 部署。
+						使用 Markdown 撰写文章，追求简洁、易读、内容优先的风格。
+					</p>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+					<h2>About Blog</h2>
+					<p>
+						这是一个记录计算机学习过程的个人技术博客。我会在这里整理遇到的技术问题、
+						环境配置经验、Bug 排查过程，以及一些学习心得和项目复盘。
+					</p>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+					<h3>主要内容</h3>
+					<ul>
+						<li>技术 Bug 排查与解决方案</li>
+						<li>开发环境配置记录</li>
+						<li>前端开发学习笔记</li>
+						<li>项目开发经验总结</li>
+						<li>摄影作品与拍摄记录</li>
+					</ul>
+
+					<h3>建站工具链</h3>
+					<ul>
+						<li>Framework: <a href="https://astro.build" target="_blank" rel="noopener">Astro</a></li>
+						<li>Hosting: <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></li>
+						<li>Icons: <a href="https://iconify.design/" target="_blank" rel="noopener">Iconify</a></li>
+					</ul>
+
+					<h2>Contact</h2>
+					<p>
+						可以通过 <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a> 联系我。
+					</p>
+				</article>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.about-page {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: 0 var(--space-6) var(--space-12);
+	}
+
+	.page-header {
+		padding: var(--space-10) 0 var(--space-6);
+	}
+
+	.page-header h1 {
+		font-size: var(--text-3xl);
+		font-weight: 700;
+	}
+
+	.about-content h2 {
+		font-size: var(--text-2xl);
+		margin-top: var(--space-10);
+		margin-bottom: var(--space-4);
+		padding-bottom: var(--space-2);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.about-content h3 {
+		font-size: var(--text-xl);
+		margin-top: var(--space-6);
+		margin-bottom: var(--space-3);
+	}
+
+	.about-content p {
+		color: var(--color-text-secondary);
+		line-height: 1.8;
+	}
+
+	.about-content ul {
+		padding-left: var(--space-5);
+		margin-bottom: var(--space-4);
+	}
+
+	.about-content li {
+		margin-bottom: var(--space-2);
+		color: var(--color-text-secondary);
+		line-height: 1.7;
+	}
+
+	/* Skills */
+	.skills-section {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+		margin-bottom: var(--space-4);
+	}
+
+	.skill-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+	}
+
+	.skill-badge {
+		display: inline-block;
+		padding: var(--space-1) var(--space-3);
+		background: var(--color-bg-secondary);
+		color: var(--color-text-secondary);
+		border: 1px solid var(--color-border);
+		border-radius: 9999px;
+		font-size: var(--text-sm);
+		transition: all var(--transition-fast);
+	}
+
+	.skill-badge:hover {
+		border-color: var(--color-primary);
+		color: var(--color-primary);
+		background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+	}
+
+	@media (max-width: 768px) {
+		.about-page {
+			padding: 0 var(--space-4) var(--space-8);
+		}
+
+		.page-header {
+			padding: var(--space-6) 0 var(--space-4);
+		}
+	}
+</style>

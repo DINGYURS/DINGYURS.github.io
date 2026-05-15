@@ -1,141 +1,348 @@
 /*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+ * Design System - Inspired by Astro Theme Pure
+ * Clean, modern blog with green accent color
  */
 
+/* ========== Design Tokens ========== */
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+	/* Color - HSL format like 8cat.life */
+	--primary: 165 67% 28%;
+	--primary-foreground: 0 0% 100%;
+	--secondary: 150 14% 97%;
+	--secondary-foreground: 165 67% 28%;
+	--muted: 210 12% 96%;
+	--muted-foreground: 210 9% 45%;
+	--accent: 150 20% 94%;
+	--accent-foreground: 165 67% 28%;
+	--destructive: 0 84.2% 60.2%;
+	--destructive-foreground: 210 40% 98%;
+	--border: 210 14% 89%;
+	--input: 210 14% 89%;
+	--ring: 165 67% 28%;
+	--radius: 0.5rem;
+	--background: 0 0% 100%;
+	--foreground: 200 6% 10%;
+	--card: 0 0% 100%;
+	--card-foreground: 200 6% 10%;
+	--callout-background: 0 0% 100%;
+
+	/* Derived colors */
+	--color-primary: hsl(var(--primary));
+	--color-primary-hover: hsl(165 67% 22%);
+	--color-text: hsl(var(--foreground));
+	--color-text-secondary: hsl(var(--muted-foreground));
+	--color-text-muted: hsl(210 9% 55%);
+	--color-bg: hsl(var(--background));
+	--color-bg-secondary: hsl(var(--secondary));
+	--color-bg-tertiary: hsl(var(--muted));
+	--color-border: hsl(var(--border));
+
+	/* Typography */
+	--font-body: var(--font-atkinson), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+	--font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+	--font-serif: 'Noto Serif CJK', 'Source Han Serif SC', 'Noto Serif SC', Georgia, serif;
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.125rem;
+	--text-xl: 1.25rem;
+	--text-2xl: 1.5rem;
+	--text-3xl: 1.875rem;
+	--text-4xl: 2.25rem;
+	--text-5xl: 3rem;
+	--text-6xl: 3.75rem;
+
+	/* Spacing */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.25rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-10: 2.5rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+
+	/* Layout */
+	--max-width: 720px;
+	--max-width-wide: 75rem;
+
+	/* Shadow */
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+
+	/* Transition */
+	--transition-fast: 150ms ease;
+	--transition-base: 200ms ease;
+	--transition-slow: 300ms ease;
+
+	/* Scrollbar */
+	--scrollbar-width: 6px;
+	--scrollbar-bg: #e0e0e0;
+	--scrollbar-thumb-bg: #c0c0c0;
 }
-body {
-	font-family: var(--font-atkinson);
+
+/* Dark mode */
+[data-theme="dark"] {
+	--background: 200 6% 10%;
+	--foreground: 210 20% 94%;
+	--card: 200 6% 10%;
+	--card-foreground: 210 20% 94%;
+	--primary: 165 50% 55%;
+	--primary-foreground: 200 6% 10%;
+	--secondary: 200 6% 14%;
+	--secondary-foreground: 165 50% 55%;
+	--muted: 200 6% 16%;
+	--muted-foreground: 210 9% 55%;
+	--accent: 200 6% 14%;
+	--accent-foreground: 165 50% 55%;
+	--border: 200 6% 20%;
+	--input: 200 6% 20%;
+	--ring: 165 50% 55%;
+	--callout-background: 200 6% 14%;
+
+	--color-primary: hsl(var(--primary));
+	--color-primary-hover: hsl(165 50% 60%);
+	--color-text: hsl(var(--foreground));
+	--color-text-secondary: hsl(var(--muted-foreground));
+	--color-text-muted: hsl(210 9% 45%);
+	--color-bg: hsl(var(--background));
+	--color-bg-secondary: hsl(var(--secondary));
+	--color-bg-tertiary: hsl(var(--muted));
+	--color-border: hsl(var(--border));
+
+	--scrollbar-bg: #2e2e2e;
+	--scrollbar-thumb-bg: #4e4e4e;
+
+	color-scheme: dark;
+}
+
+html[data-theme="dark"] {
+	color-scheme: dark;
+}
+
+/* ========== Reset & Base ========== */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
+}
+
+html {
+	font-size: 16px;
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+	-moz-tab-size: 4;
+	tab-size: 4;
+}
+
+body {
+	font-family: var(--font-body);
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	line-height: 1.7;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== Animation ========== */
+@keyframes fade-in-up {
+	0% {
+		transform: translateY(2rem);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.animate {
+	opacity: 0;
+	animation: 300ms fade-in-up;
+	animation-fill-mode: forwards;
+}
+
+@media (prefers-reduced-motion) {
+	.animate {
+		animation-duration: 100ms;
+	}
+}
+
+/* ========== Typography ========== */
+h1, h2, h3, h4, h5, h6 {
+	color: var(--color-text);
+	line-height: 1.3;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+
+p {
+	margin-bottom: var(--space-4);
 	line-height: 1.7;
 }
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
+
+strong, b {
 	font-weight: 700;
 }
+
 a {
-	color: var(--accent);
+	color: var(--color-primary);
+	text-decoration: none;
+	transition: color var(--transition-fast);
 }
+
 a:hover {
-	color: var(--accent);
+	color: var(--color-primary-hover);
 }
-p {
-	margin-bottom: 1em;
+
+/* ========== Code ========== */
+code {
+	font-family: var(--font-mono);
+	font-size: 0.875em;
+	padding: 0.125em 0.375em;
+	background-color: var(--color-bg-tertiary);
+	border-radius: var(--radius);
 }
-.prose p {
-	margin-bottom: 2em;
+
+pre {
+	padding: var(--space-4);
+	background-color: var(--color-bg-tertiary);
+	border-radius: var(--radius);
+	overflow-x: auto;
+	line-height: 1.6;
 }
-textarea {
-	width: 100%;
-	font-size: 16px;
+
+pre > code {
+	all: unset;
+	font-family: var(--font-mono);
+	font-size: var(--text-sm);
 }
-input {
-	font-size: 16px;
+
+/* ========== Blockquote ========== */
+blockquote {
+	border-left: 3px solid var(--color-primary);
+	padding-left: var(--space-4);
+	margin: var(--space-6) 0;
+	color: var(--color-text-secondary);
+	font-style: italic;
 }
+
+/* ========== Lists ========== */
+ul, ol {
+	padding-left: var(--space-6);
+	margin-bottom: var(--space-4);
+}
+
+li {
+	margin-bottom: var(--space-2);
+}
+
+/* ========== Table ========== */
 table {
 	width: 100%;
+	border-collapse: collapse;
+	margin: var(--space-6) 0;
 }
+
+th, td {
+	padding: var(--space-3) var(--space-4);
+	text-align: left;
+	border-bottom: 1px solid var(--color-border);
+}
+
+th {
+	font-weight: 600;
+	color: var(--color-text);
+	background-color: var(--color-bg-secondary);
+}
+
+/* ========== Images ========== */
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
 }
 
+/* ========== Horizontal Rule ========== */
+hr {
+	border: none;
+	border-top: 1px solid var(--color-border);
+	margin: var(--space-8) 0;
+}
+
+/* ========== Form Elements ========== */
+textarea {
+	width: 100%;
+	font-size: var(--text-base);
+	font-family: var(--font-body);
+	padding: var(--space-3);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	background: var(--color-bg);
+	color: var(--color-text);
+}
+
+input {
+	font-size: var(--text-base);
+	font-family: var(--font-body);
+	padding: var(--space-3);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	background: var(--color-bg);
+	color: var(--color-text);
+}
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar {
+	width: var(--scrollbar-width);
+	height: var(--scrollbar-width);
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--scrollbar-thumb-bg);
+	border-radius: 999px;
+	border: 2px solid var(--scrollbar-thumb-bg);
+}
+
+::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* ========== Utility Classes ========== */
 .sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
+	position: absolute;
 	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
+	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
+	border: 0;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+	html {
+		font-size: 15px;
+	}
+
+	h1 { font-size: var(--text-3xl); }
+	h2 { font-size: var(--text-2xl); }
+	h3 { font-size: var(--text-xl); }
 }

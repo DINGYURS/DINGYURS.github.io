@@ -1,49 +1,442 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_SLOGAN, GITHUB_URL, HOME_POST_COUNT, SITE_START_DATE } from '../consts';
+import { countWords, formatUptime } from '../utils';
+
+const allPosts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const posts = allPosts.slice(0, HOME_POST_COUNT);
+
+// Stats
+const articleCount = allPosts.length;
+const totalWords = allPosts.reduce((sum, post) => sum + countWords(post.body || ''), 0);
+const uptime = formatUptime(new Date(SITE_START_DATE));
+
+function formatDate(date: Date): string {
+	return date.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' });
+}
+
+function padNumber(n: number): string {
+	return String(n).padStart(2, '0');
+}
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<!-- Hero Section -->
+			<section class="hero animate" style="animation-delay: 50ms">
+				<div class="avatar-placeholder"></div>
+				<h1 class="site-name">{SITE_TITLE}</h1>
+				<p class="slogan">"{ SITE_SLOGAN }"</p>
+				<div class="hero-meta">
+					<span class="location">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+							<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+						</svg>
+						China
+					</span>
+					<span class="separator">|</span>
+					<span class="description">{SITE_DESCRIPTION}</span>
+				</div>
+			</section>
+
+			<!-- Two Column Layout -->
+			<div class="content-layout animate" style="animation-delay: 100ms">
+				<!-- Main Content -->
+				<div class="main-content">
+					<div class="section-header">
+						<h2>最新文章</h2>
+					</div>
+					<div class="article-list">
+						{posts.map((post, index) => (
+							<a href={`/blog/${post.id}/`} class="article-item">
+								{post.data.heroImage && (
+									<div class="article-cover">
+										<img src={post.data.heroImage.src} alt={post.data.title} loading="lazy" />
+									</div>
+								)}
+								<div class="article-number">{padNumber(index + 1)}</div>
+								<div class="article-info">
+									<div class="article-meta">
+										<time>{formatDate(post.data.pubDate)}</time>
+										<span class="article-title">{post.data.title}</span>
+									</div>
+									{post.data.description && (
+										<p class="article-desc">{post.data.description}</p>
+									)}
+								</div>
+							</a>
+						))}
+					</div>
+					<a href="/blog" class="view-all-link">全部文章 &rarr;</a>
+				</div>
+
+				<!-- Sidebar -->
+				<aside class="sidebar">
+					<!-- Stats Card -->
+					<div class="sidebar-card">
+						<div class="card-header">
+							<span class="card-icon">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+								</svg>
+							</span>
+							<span class="card-title">站点统计</span>
+						</div>
+						<div class="stats-from">from {SITE_START_DATE}</div>
+						<div class="stats-grid">
+							<div class="stat-item">
+								<div class="stat-label">Articles</div>
+								<div class="stat-value">{articleCount}</div>
+							</div>
+							<div class="stat-item">
+								<div class="stat-label">Words</div>
+								<div class="stat-value">{totalWords.toLocaleString()}</div>
+							</div>
+							<div class="stat-item">
+								<div class="stat-label">UpTime</div>
+								<div class="stat-value">{uptime}</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Contact Card -->
+					<div class="sidebar-card">
+						<div class="card-header">
+							<span class="card-icon">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/>
+								</svg>
+							</span>
+							<span class="card-title">联系我</span>
+						</div>
+						<div class="contact-links">
+							<a href={GITHUB_URL} target="_blank" rel="noopener" class="contact-item">
+								<svg viewBox="0 0 16 16" width="16" height="16">
+									<path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0016 8c0-4.42-3.58-8-8-8z"/>
+								</svg>
+								<span>GitHub</span>
+							</a>
+							<a href="/rss.xml" target="_blank" rel="noopener" class="contact-item">
+								<svg viewBox="0 0 16 16" width="16" height="16">
+									<path fill="currentColor" d="M2.002 2.725a.75.75 0 01.797-.699C8.79 2.42 13.58 7.21 13.974 13.201a.75.75 0 11-1.497.098C12.14 8.27 7.73 3.86 2.702 3.523a.75.75 0 01-.7-.798zM2 13a1 1 0 112 0 1 1 0 01-2 0zm.84-5.95a.75.75 0 01.821-.671c2.862.3 5.15 2.59 5.45 5.451a.75.75 0 01-1.495.148c-.245-2.31-2.135-4.2-4.446-4.446a.75.75 0 01-.33-.532z"/>
+								</svg>
+								<span>RSS</span>
+							</a>
+						</div>
+					</div>
+				</aside>
+			</div>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	/* Hero Section */
+	.hero {
+		text-align: center;
+		padding: var(--space-12) var(--space-4) var(--space-8);
+		max-width: var(--max-width-wide);
+		margin: 0 auto;
+	}
+
+	.avatar-placeholder {
+		width: 100px;
+		height: 100px;
+		border-radius: var(--radius);
+		background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 20%, transparent), color-mix(in srgb, var(--color-primary) 40%, transparent));
+		margin: 0 auto var(--space-5);
+		border: 3px solid var(--color-border);
+	}
+
+	.site-name {
+		font-size: var(--text-4xl);
+		font-weight: 700;
+		margin-bottom: var(--space-3);
+		letter-spacing: -0.03em;
+	}
+
+	.slogan {
+		font-family: var(--font-serif);
+		color: var(--color-text-secondary);
+		font-size: var(--text-lg);
+		font-style: italic;
+		margin-bottom: var(--space-5);
+	}
+
+	.hero-meta {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-3);
+		font-size: var(--text-sm);
+		color: var(--color-text-muted);
+		flex-wrap: wrap;
+	}
+
+	.location {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-1);
+	}
+
+	.separator {
+		color: var(--color-border);
+	}
+
+	.hero-meta .description {
+		max-width: 400px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	/* Two Column Layout */
+	.content-layout {
+		display: grid;
+		grid-template-columns: 1fr 280px;
+		gap: var(--space-10);
+		max-width: var(--max-width-wide);
+		margin: 0 auto;
+		padding: 0 var(--space-6) var(--space-12);
+	}
+
+	/* Main Content */
+	.main-content {
+		min-width: 0;
+	}
+
+	.section-header {
+		margin-bottom: var(--space-6);
+		padding-bottom: var(--space-3);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.section-header h2 {
+		font-size: var(--text-xl);
+		font-weight: 600;
+	}
+
+	/* Article List */
+	.article-list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.article-item {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--space-4);
+		padding: var(--space-4) 0;
+		border-bottom: 1px dashed var(--color-border);
+		text-decoration: none;
+		color: inherit;
+		transition: all var(--transition-fast);
+	}
+
+	.article-item:hover {
+		background: color-mix(in srgb, var(--color-primary) 4%, transparent);
+	}
+
+	.article-item:last-child {
+		border-bottom: none;
+	}
+
+	.article-cover {
+		flex-shrink: 0;
+		width: 120px;
+		height: 80px;
+		border-radius: var(--radius);
+		overflow: hidden;
+	}
+
+	.article-cover img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.article-number {
+		flex-shrink: 0;
+		font-size: var(--text-2xl);
+		font-weight: 700;
+		color: var(--color-border);
+		min-width: 2rem;
+		text-align: right;
+		line-height: 1;
+		padding-top: 2px;
+	}
+
+	.article-info {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.article-meta {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+		margin-bottom: var(--space-1);
+	}
+
+	.article-meta time {
+		font-size: var(--text-xs);
+		color: var(--color-text-muted);
+		font-family: var(--font-mono);
+	}
+
+	.article-title {
+		font-size: var(--text-base);
+		font-weight: 600;
+		color: var(--color-text);
+		line-height: 1.4;
+	}
+
+	.article-item:hover .article-title {
+		color: var(--color-primary);
+	}
+
+	.article-desc {
+		font-size: var(--text-sm);
+		color: var(--color-text-secondary);
+		margin: 0;
+		line-height: 1.6;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.view-all-link {
+		display: inline-block;
+		margin-top: var(--space-6);
+		color: var(--color-primary);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		text-decoration: none;
+		transition: opacity var(--transition-fast);
+	}
+
+	.view-all-link:hover {
+		opacity: 0.7;
+	}
+
+	/* Sidebar */
+	.sidebar {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-5);
+	}
+
+	.sidebar-card {
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		padding: var(--space-4);
+		background: var(--color-bg);
+	}
+
+	.card-header {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		margin-bottom: var(--space-3);
+		font-weight: 600;
+		font-size: var(--text-sm);
+	}
+
+	.card-icon {
+		color: var(--color-primary);
+		display: flex;
+	}
+
+	.stats-from {
+		font-size: var(--text-xs);
+		color: var(--color-text-muted);
+		margin-bottom: var(--space-3);
+	}
+
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-3);
+	}
+
+	.stat-item {
+		text-align: center;
+	}
+
+	.stat-label {
+		font-size: var(--text-xs);
+		color: var(--color-text-muted);
+		margin-bottom: var(--space-1);
+	}
+
+	.stat-value {
+		font-size: var(--text-lg);
+		font-weight: 700;
+		color: var(--color-text);
+	}
+
+	.contact-links {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+
+	.contact-item {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+		padding: var(--space-2) var(--space-3);
+		border-radius: var(--radius);
+		color: var(--color-text-secondary);
+		text-decoration: none;
+		font-size: var(--text-sm);
+		transition: all var(--transition-fast);
+	}
+
+	.contact-item:hover {
+		color: var(--color-primary);
+		background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.hero {
+			padding: var(--space-8) var(--space-4) var(--space-6);
+		}
+
+		.site-name {
+			font-size: var(--text-3xl);
+		}
+
+		.content-layout {
+			grid-template-columns: 1fr;
+			padding: 0 var(--space-4) var(--space-8);
+		}
+
+		.sidebar {
+			order: -1;
+		}
+
+		.article-cover {
+			display: none;
+		}
+
+		.hero-meta .description {
+			display: none;
+		}
+	}
+</style>
